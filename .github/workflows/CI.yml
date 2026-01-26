@@ -1,6 +1,6 @@
 name: Build e push da imagem
 
-#definindo gatilho para a ação: nesse caso definindo para o PR.
+#Definindo o gatilho para a ação: neste caso, configurado para o push. Em ambientes produtivos, o ideal, na minha visão, é que esse fluxo seja no PR.
 on:
     push:
       branches: [ "main" ]
@@ -33,7 +33,7 @@ jobs:
         - name: Update no repo de GitOps
           run: |
             git clone https://x-access-token:${{ secrets.GITOPS_TOKEN }}@github.com/fw356c/Live-testeGitOps.git
-            cd repo-gitops
+            cd Live-testeGitOps
             sed -i 's|image:.*|image: usuario/node-api:${{ github.sha }}|' k8s/deployment.yaml
             git commit -am "Update image to ${{ github.sha }}"
             git push
