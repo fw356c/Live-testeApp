@@ -2,7 +2,7 @@ name: Build e push da imagem
 
 #definindo gatilho para a ação: nesse caso definindo para o PR.
 on:
-    pull_request:
+    push:
       branches: [ "main" ]
 
 jobs:
