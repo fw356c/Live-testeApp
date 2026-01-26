@@ -41,7 +41,6 @@ Após a validação desses pontos iniciais, no curto prazo, medidas de mitigaç�
 
 Diagrama:
 
-        ```text
         Usuários
            |
         Application Load Balancer (ALB)
