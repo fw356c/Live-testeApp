@@ -32,7 +32,7 @@ jobs:
 
         - name: Update no repo de GitOps
           run: |
-            git clone https://x-access-token:${{ secrets.GITOPS_TOKEN }}@github.com/org/repo-gitops.git
+            git clone https://x-access-token:${{ secrets.GITOPS_TOKEN }}@github.com/fw356c/Live-testeGitOps.git
             cd repo-gitops
             sed -i 's|image:.*|image: usuario/node-api:${{ github.sha }}|' k8s/deployment.yaml
             git commit -am "Update image to ${{ github.sha }}"
