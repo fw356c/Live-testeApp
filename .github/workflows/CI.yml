@@ -1,0 +1,39 @@
+name: Build e push da imagem
+
+#definindo gatilho para a ação: nesse caso definindo para o PR.
+on:
+    pull_request:
+      branches: [ "main" ]
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Install dependencies
+          run: npm ci
+
+        - name: Run tests
+          run: npm test
+
+          #Feito como docker hub - Mas podemos usar ECR da AWS tbm.
+        - name: RepoImage
+          run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+
+        - name: Build da imagem
+          run: docker build -t usuario/node-api:${{ github.sha }} .
+
+
+        - name: Push da imagem
+          run: docker push usuario/node-api:${{ github.sha }}
+
+
+        - name: Update no repo de GitOps
+          run: |
+            git clone https://x-access-token:${{ secrets.GITOPS_TOKEN }}@github.com/org/repo-gitops.git
+            cd repo-gitops
+            sed -i 's|image:.*|image: usuario/node-api:${{ github.sha }}|' k8s/deployment.yaml
+            git commit -am "Update image to ${{ github.sha }}"
+            git push
