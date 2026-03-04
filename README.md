@@ -5,7 +5,7 @@ Para a construção da imagem Docker da aplicação, optei por utilizar a imagem
 Além disso, foi utilizada a abordagem de multi-stage build, separando a etapa de instalação das dependências da etapa de execução. Essa estratégia permite reduzir o tamanho da imagem final, eliminando arquivos desnecessários como cache do gerenciador de pacotes e ferramentas de build, resultando menor e mais eficiente.
 
 ## Teste 2 – Kubernetes
-Separei essa parte em outro repositório (https://github.com/fw356c/Live-testeGitOps.git) seguinto bos praticas de GitOps, permitindo que ferramentas como ArgoCD efetuem a sicronização de estado do cluster de forma automatica partindo das alterações no repositório de infraestrutura.
+Separei essa parte em outro repositório (https://github.com/fw356c/Live-testeGitOps.git) seguinto boas praticas de GitOps, permitindo que ferramentas como ArgoCD efetuem a sicronização de estado do cluster de forma automatica partindo das alterações no repositório de infraestrutura.
 
 ## Teste 3 - CI/CD
 
